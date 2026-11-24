@@ -1,0 +1,14 @@
+
+> access-ledger@1.0.0 test:e2e
+> playwright test
+
+
+Running 5 tests using 1 worker
+
+  ✓  1 e2e/workflows.spec.ts:12:1 › administrator shell, every page, both themes and collapse persistence (13.5s)
+  ✓  2 e2e/workflows.spec.ts:27:1 › ordinary-user requests persist allowed, denied and inactive outcomes (7.4s)
+  ✓  3 e2e/workflows.spec.ts:36:1 › complete administrator account, role, mapping, grant and revocation workflow (12.3s)
+  ✓  4 e2e/workflows.spec.ts:49:1 › auditor filters details and downloads the exact bounded CSV (6.7s)
+  ✓  5 e2e/workflows.spec.ts:59:1 › mobile navigation, forms and tables remain within the viewport in both themes (7.4s)
+
+  5 passed (58.3s)

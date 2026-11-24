@@ -1,0 +1,30 @@
+import type { components } from "./schema";
+type S = components["schemas"];
+export type Session = S["SessionOut"];
+export type User = S["UserRow"];
+export type Role = S["RoleRow"];
+export type Permission = S["PermissionOut"];
+export type Resource = S["ResourceRow"];
+export type AuditEvent = S["AuditOut"];
+export type PolicyChange = S["PolicyOut"];
+export type SecurityEvent = S["SecurityOut"];
+export type Assignment = S["AssignmentRow"];
+export type Mapping = S["MappingRow"];
+export type Dashboard = S["DashboardOut"];
+export type Options = S["OptionsOut"];
+export type LoginInput = S["LoginInput"];
+export type UserInput = S["UserInput"];
+export type RoleInput = S["RoleInput"];
+export type PermissionInput = S["PermissionInput"];
+export type ResourceInput = S["ResourceInput"];
+export type AssignmentInput = S["AssignmentInput"];
+export type MappingInput = S["MappingInput"];
+export type AccessInput = S["AccessInput"];
+export interface Page<T> {
+  items: T[];
+  total: number;
+  page: number;
+  page_size: number;
+  pages: number;
+}
+export type Category = Session["category"];

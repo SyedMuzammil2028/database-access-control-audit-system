@@ -1,0 +1,2777 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Access Ledger API",
+    "version": "2.0.0"
+  },
+  "paths": {
+    "/api/auth/csrf": {
+      "get": {
+        "summary": "Csrf",
+        "operationId": "csrf_api_auth_csrf_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CsrfOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "summary": "Login",
+        "operationId": "login_api_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/session": {
+      "get": {
+        "summary": "Get Session",
+        "operationId": "get_session_api_auth_session_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "summary": "Logout",
+        "operationId": "logout_api_auth_logout_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/dashboard": {
+      "get": {
+        "summary": "Dashboard",
+        "operationId": "dashboard_api_dashboard_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "summary": "Users",
+        "operationId": "users_api_users_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100000,
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 200,
+              "default": "",
+              "title": "Q"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^(active|inactive)?$",
+              "default": "",
+              "title": "Status"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "name",
+              "title": "Sort"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_UserRow_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create User",
+        "operationId": "create_user_api_users_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/roles": {
+      "get": {
+        "summary": "Roles",
+        "operationId": "roles_api_roles_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100000,
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 200,
+              "default": "",
+              "title": "Q"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^(active|inactive)?$",
+              "default": "",
+              "title": "Status"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "name",
+              "title": "Sort"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_RoleRow_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Role",
+        "operationId": "create_role_api_roles_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/permissions": {
+      "get": {
+        "summary": "Permissions",
+        "operationId": "permissions_api_permissions_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100000,
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 200,
+              "default": "",
+              "title": "Q"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_PermissionOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Permission",
+        "operationId": "create_permission_api_permissions_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermissionInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PermissionOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mappings": {
+      "get": {
+        "summary": "Mappings",
+        "operationId": "mappings_api_mappings_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100000,
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 200,
+              "default": "",
+              "title": "Q"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_MappingRow_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Map Permission",
+        "operationId": "map_permission_api_mappings_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MappingInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/assignments": {
+      "get": {
+        "summary": "Assignments",
+        "operationId": "assignments_api_assignments_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100000,
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 200,
+              "default": "",
+              "title": "Q"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^(active|inactive)?$",
+              "default": "",
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_AssignmentRow_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Assign",
+        "operationId": "assign_api_assignments_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignmentInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/resources": {
+      "get": {
+        "summary": "Resources",
+        "operationId": "resources_api_resources_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100000,
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 200,
+              "default": "",
+              "title": "Q"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^(active|inactive)?$",
+              "default": "",
+              "title": "Status"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 40,
+              "default": "",
+              "title": "Type"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "name",
+              "title": "Sort"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_ResourceRow_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Resource",
+        "operationId": "create_resource_api_resources_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/options/{collection}": {
+      "get": {
+        "summary": "Options",
+        "operationId": "options_api_options__collection__get",
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Collection"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 200,
+              "default": "",
+              "title": "Q"
+            }
+          },
+          {
+            "name": "selected_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "exclusiveMinimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Selected Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptionsOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/access": {
+      "post": {
+        "summary": "Access",
+        "operationId": "access_api_access_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/audit": {
+      "get": {
+        "summary": "Audit",
+        "operationId": "audit_api_audit_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100000,
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_AuditOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/history": {
+      "get": {
+        "summary": "History",
+        "operationId": "history_api_history_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100000,
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_AuditOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/events/{event_id}": {
+      "get": {
+        "summary": "Event Detail",
+        "operationId": "event_detail_api_events__event_id__get",
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Event Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/policy": {
+      "get": {
+        "summary": "Policy",
+        "operationId": "policy_api_policy_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100000,
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_PolicyOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/security": {
+      "get": {
+        "summary": "Security",
+        "operationId": "security_api_security_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100000,
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 200,
+              "default": "",
+              "title": "Q"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_SecurityOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/audit/export": {
+      "get": {
+        "summary": "Export",
+        "operationId": "export_api_audit_export_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{ident}/status": {
+      "patch": {
+        "summary": "User Status",
+        "operationId": "user_status_api_users__ident__status_patch",
+        "parameters": [
+          {
+            "name": "ident",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Ident"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/roles/{ident}": {
+      "put": {
+        "summary": "Update Role",
+        "operationId": "update_role_api_roles__ident__put",
+        "parameters": [
+          {
+            "name": "ident",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Ident"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/roles/{ident}/status": {
+      "patch": {
+        "summary": "Role Status",
+        "operationId": "role_status_api_roles__ident__status_patch",
+        "parameters": [
+          {
+            "name": "ident",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Ident"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/resources/{ident}/status": {
+      "patch": {
+        "summary": "Resource Status",
+        "operationId": "resource_status_api_resources__ident__status_patch",
+        "parameters": [
+          {
+            "name": "ident",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Ident"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/assignments/{user_id}/{role_id}": {
+      "delete": {
+        "summary": "Revoke",
+        "operationId": "revoke_api_assignments__user_id___role_id__delete",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "User Id"
+            }
+          },
+          {
+            "name": "role_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Role Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mappings/{role_id}/{permission_id}": {
+      "delete": {
+        "summary": "Unmap",
+        "operationId": "unmap_api_mappings__role_id___permission_id__delete",
+        "parameters": [
+          {
+            "name": "role_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Role Id"
+            }
+          },
+          {
+            "name": "permission_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Permission Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccessInput": {
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "READ",
+              "CREATE",
+              "UPDATE",
+              "DELETE"
+            ],
+            "title": "Action"
+          },
+          "resource_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Resource Id"
+          },
+          "request_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Request Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "action",
+          "resource_id",
+          "request_id"
+        ],
+        "title": "AccessInput"
+      },
+      "AssignmentInput": {
+        "properties": {
+          "user_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "User Id"
+          },
+          "role_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Role Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "user_id",
+          "role_id"
+        ],
+        "title": "AssignmentInput"
+      },
+      "AssignmentRow": {
+        "properties": {
+          "user_id": {
+            "type": "integer",
+            "title": "User Id"
+          },
+          "role_id": {
+            "type": "integer",
+            "title": "Role Id"
+          },
+          "user_name": {
+            "type": "string",
+            "title": "User Name"
+          },
+          "user_email": {
+            "type": "string",
+            "title": "User Email"
+          },
+          "role_name": {
+            "type": "string",
+            "title": "Role Name"
+          },
+          "role_active": {
+            "type": "boolean",
+            "title": "Role Active"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "assigned_by": {
+            "type": "integer",
+            "title": "Assigned By"
+          },
+          "assigned_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Assigned At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_id",
+          "role_id",
+          "user_name",
+          "user_email",
+          "role_name",
+          "role_active",
+          "active",
+          "assigned_by",
+          "assigned_at"
+        ],
+        "title": "AssignmentRow"
+      },
+      "AuditOut": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "actor_user_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actor User Id"
+          },
+          "actor_email": {
+            "type": "string",
+            "title": "Actor Email"
+          },
+          "action": {
+            "type": "string",
+            "title": "Action"
+          },
+          "resource_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resource Id"
+          },
+          "resource_type": {
+            "type": "string",
+            "title": "Resource Type"
+          },
+          "resource_key": {
+            "type": "string",
+            "title": "Resource Key"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "ALLOWED",
+              "DENIED"
+            ],
+            "title": "Decision"
+          },
+          "reason_code": {
+            "type": "string",
+            "title": "Reason Code"
+          },
+          "matching_role_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Matching Role Id"
+          },
+          "matching_role_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Matching Role Name"
+          },
+          "request_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Request Id"
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Occurred At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "actor_user_id",
+          "actor_email",
+          "action",
+          "resource_id",
+          "resource_type",
+          "resource_key",
+          "decision",
+          "reason_code",
+          "matching_role_id",
+          "matching_role_name",
+          "request_id",
+          "occurred_at"
+        ],
+        "title": "AuditOut"
+      },
+      "CsrfOut": {
+        "properties": {
+          "csrf_token": {
+            "type": "string",
+            "title": "Csrf Token"
+          }
+        },
+        "type": "object",
+        "required": [
+          "csrf_token"
+        ],
+        "title": "CsrfOut"
+      },
+      "DashboardOut": {
+        "properties": {
+          "stats": {
+            "$ref": "#/components/schemas/DashboardStats"
+          },
+          "recent": {
+            "items": {
+              "$ref": "#/components/schemas/AuditOut"
+            },
+            "type": "array",
+            "title": "Recent"
+          },
+          "changes": {
+            "items": {
+              "$ref": "#/components/schemas/PolicyOut"
+            },
+            "type": "array",
+            "title": "Changes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "stats",
+          "recent",
+          "changes"
+        ],
+        "title": "DashboardOut"
+      },
+      "DashboardStats": {
+        "properties": {
+          "events": {
+            "type": "integer",
+            "title": "Events"
+          },
+          "allowed": {
+            "type": "integer",
+            "title": "Allowed"
+          },
+          "denied": {
+            "type": "integer",
+            "title": "Denied"
+          },
+          "users": {
+            "type": "integer",
+            "title": "Users"
+          },
+          "roles": {
+            "type": "integer",
+            "title": "Roles"
+          },
+          "resources": {
+            "type": "integer",
+            "title": "Resources"
+          },
+          "policies": {
+            "type": "integer",
+            "title": "Policies"
+          },
+          "recent": {
+            "type": "integer",
+            "title": "Recent"
+          },
+          "recent_denied": {
+            "type": "integer",
+            "title": "Recent Denied"
+          }
+        },
+        "type": "object",
+        "required": [
+          "events",
+          "allowed",
+          "denied",
+          "users",
+          "roles",
+          "resources",
+          "policies",
+          "recent",
+          "recent_denied"
+        ],
+        "title": "DashboardStats"
+      },
+      "EffectivePermission": {
+        "properties": {
+          "action": {
+            "type": "string",
+            "title": "Action"
+          },
+          "resource_type": {
+            "type": "string",
+            "title": "Resource Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "action",
+          "resource_type"
+        ],
+        "title": "EffectivePermission"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LoginInput": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "maxLength": 254,
+            "minLength": 1,
+            "title": "Email"
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Password"
+          },
+          "csrf_token": {
+            "type": "string",
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Csrf Token"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "email",
+          "password",
+          "csrf_token"
+        ],
+        "title": "LoginInput"
+      },
+      "MappingInput": {
+        "properties": {
+          "role_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Role Id"
+          },
+          "permission_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Permission Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "role_id",
+          "permission_id"
+        ],
+        "title": "MappingInput"
+      },
+      "MappingRow": {
+        "properties": {
+          "role_id": {
+            "type": "integer",
+            "title": "Role Id"
+          },
+          "permission_id": {
+            "type": "integer",
+            "title": "Permission Id"
+          },
+          "role_name": {
+            "type": "string",
+            "title": "Role Name"
+          },
+          "action": {
+            "type": "string",
+            "title": "Action"
+          },
+          "resource_type": {
+            "type": "string",
+            "title": "Resource Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "role_id",
+          "permission_id",
+          "role_name",
+          "action",
+          "resource_type"
+        ],
+        "title": "MappingRow"
+      },
+      "Message": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "Message"
+      },
+      "Option": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "label"
+        ],
+        "title": "Option"
+      },
+      "OptionsOut": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Option"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more"
+        ],
+        "title": "OptionsOut"
+      },
+      "Page_AssignmentRow_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AssignmentRow"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "pages": {
+            "type": "integer",
+            "title": "Pages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size",
+          "pages"
+        ],
+        "title": "Page[AssignmentRow]"
+      },
+      "Page_AuditOut_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AuditOut"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "pages": {
+            "type": "integer",
+            "title": "Pages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size",
+          "pages"
+        ],
+        "title": "Page[AuditOut]"
+      },
+      "Page_MappingRow_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MappingRow"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "pages": {
+            "type": "integer",
+            "title": "Pages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size",
+          "pages"
+        ],
+        "title": "Page[MappingRow]"
+      },
+      "Page_PermissionOut_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PermissionOut"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "pages": {
+            "type": "integer",
+            "title": "Pages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size",
+          "pages"
+        ],
+        "title": "Page[PermissionOut]"
+      },
+      "Page_PolicyOut_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PolicyOut"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "pages": {
+            "type": "integer",
+            "title": "Pages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size",
+          "pages"
+        ],
+        "title": "Page[PolicyOut]"
+      },
+      "Page_ResourceRow_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ResourceRow"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "pages": {
+            "type": "integer",
+            "title": "Pages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size",
+          "pages"
+        ],
+        "title": "Page[ResourceRow]"
+      },
+      "Page_RoleRow_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RoleRow"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "pages": {
+            "type": "integer",
+            "title": "Pages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size",
+          "pages"
+        ],
+        "title": "Page[RoleRow]"
+      },
+      "Page_SecurityOut_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SecurityOut"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "pages": {
+            "type": "integer",
+            "title": "Pages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size",
+          "pages"
+        ],
+        "title": "Page[SecurityOut]"
+      },
+      "Page_UserRow_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/UserRow"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "pages": {
+            "type": "integer",
+            "title": "Pages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size",
+          "pages"
+        ],
+        "title": "Page[UserRow]"
+      },
+      "PermissionInput": {
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "READ",
+              "CREATE",
+              "UPDATE",
+              "DELETE"
+            ],
+            "title": "Action"
+          },
+          "resource_type": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,39}$",
+            "title": "Resource Type"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "action",
+          "resource_type"
+        ],
+        "title": "PermissionInput"
+      },
+      "PermissionOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "action": {
+            "type": "string",
+            "title": "Action"
+          },
+          "resource_type": {
+            "type": "string",
+            "title": "Resource Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "action",
+          "resource_type"
+        ],
+        "title": "PermissionOut"
+      },
+      "PolicyOut": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "actor_user_id": {
+            "type": "integer",
+            "title": "Actor User Id"
+          },
+          "actor_email": {
+            "type": "string",
+            "title": "Actor Email"
+          },
+          "target_type": {
+            "type": "string",
+            "title": "Target Type"
+          },
+          "target_id": {
+            "type": "string",
+            "title": "Target Id"
+          },
+          "operation": {
+            "type": "string",
+            "title": "Operation"
+          },
+          "details": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Details"
+          },
+          "request_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Request Id"
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Occurred At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "actor_user_id",
+          "actor_email",
+          "target_type",
+          "target_id",
+          "operation",
+          "details",
+          "request_id",
+          "occurred_at"
+        ],
+        "title": "PolicyOut"
+      },
+      "ResourceInput": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 2,
+            "title": "Name"
+          },
+          "resource_type": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,39}$",
+            "title": "Resource Type"
+          },
+          "resource_key": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Resource Key"
+          },
+          "owner_user_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Owner User Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "resource_type",
+          "resource_key",
+          "owner_user_id"
+        ],
+        "title": "ResourceInput"
+      },
+      "ResourceOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "resource_type": {
+            "type": "string",
+            "title": "Resource Type"
+          },
+          "resource_key": {
+            "type": "string",
+            "title": "Resource Key"
+          },
+          "owner_user_id": {
+            "type": "integer",
+            "title": "Owner User Id"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "resource_type",
+          "resource_key",
+          "owner_user_id",
+          "active"
+        ],
+        "title": "ResourceOut"
+      },
+      "ResourceRow": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "resource_type": {
+            "type": "string",
+            "title": "Resource Type"
+          },
+          "resource_key": {
+            "type": "string",
+            "title": "Resource Key"
+          },
+          "owner_user_id": {
+            "type": "integer",
+            "title": "Owner User Id"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "owner_name": {
+            "type": "string",
+            "title": "Owner Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "resource_type",
+          "resource_key",
+          "owner_user_id",
+          "active",
+          "owner_name"
+        ],
+        "title": "ResourceRow"
+      },
+      "RoleInput": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 2,
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 300,
+            "title": "Description",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "RoleInput"
+      },
+      "RoleOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "auditor",
+              "user"
+            ],
+            "title": "Kind"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "kind",
+          "active"
+        ],
+        "title": "RoleOut"
+      },
+      "RoleRow": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "auditor",
+              "user"
+            ],
+            "title": "Kind"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "member_count": {
+            "type": "integer",
+            "title": "Member Count"
+          },
+          "permission_count": {
+            "type": "integer",
+            "title": "Permission Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "kind",
+          "active",
+          "member_count",
+          "permission_count"
+        ],
+        "title": "RoleRow"
+      },
+      "SecurityOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "actor_user_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actor User Id"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "operation": {
+            "type": "string",
+            "title": "Operation"
+          },
+          "request_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Request Id"
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Occurred At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "actor_user_id",
+          "email",
+          "operation",
+          "request_id",
+          "occurred_at"
+        ],
+        "title": "SecurityOut"
+      },
+      "SessionOut": {
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserOut"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "auditor",
+              "user"
+            ],
+            "title": "Category"
+          },
+          "csrf_token": {
+            "type": "string",
+            "title": "Csrf Token"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Expires At"
+          },
+          "roles": {
+            "items": {
+              "$ref": "#/components/schemas/RoleOut"
+            },
+            "type": "array",
+            "title": "Roles"
+          },
+          "permissions": {
+            "items": {
+              "$ref": "#/components/schemas/EffectivePermission"
+            },
+            "type": "array",
+            "title": "Permissions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user",
+          "category",
+          "csrf_token",
+          "expires_at",
+          "roles",
+          "permissions"
+        ],
+        "title": "SessionOut"
+      },
+      "StatusInput": {
+        "properties": {
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "active"
+        ],
+        "title": "StatusInput"
+      },
+      "UserInput": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 2,
+            "title": "Name"
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 254,
+            "format": "email",
+            "title": "Email"
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 12,
+            "title": "Password"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
+        "title": "UserInput"
+      },
+      "UserOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "email",
+          "active",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "UserOut"
+      },
+      "UserRow": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "roles": {
+            "items": {
+              "$ref": "#/components/schemas/RoleOut"
+            },
+            "type": "array",
+            "title": "Roles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "email",
+          "active",
+          "created_at",
+          "updated_at",
+          "roles"
+        ],
+        "title": "UserRow"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

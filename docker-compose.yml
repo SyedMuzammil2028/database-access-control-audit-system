@@ -1,0 +1,71 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: dac
+      POSTGRES_USER: dac_owner
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run python3 scripts/configure.py first}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:?Run python3 scripts/configure.py first}
+    ports:
+      - "127.0.0.1:5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sh:/docker-entrypoint-initdb.d/01-init.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dac_owner -d dac"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  setup:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg://dac_owner:${POSTGRES_PASSWORD}@db:5432/dac
+      SECRET_KEY: ${SECRET_KEY:?Run python3 scripts/configure.py first}
+    command: ["python", "-m", "scripts.setup"]
+    depends_on:
+      db:
+        condition: service_healthy
+  web:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg://dac_app:${APP_DB_PASSWORD}@db:5432/dac
+      SECRET_KEY: ${SECRET_KEY}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      setup:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+  db-test:
+    image: postgres:17-alpine
+    profiles: ["test"]
+    environment:
+      POSTGRES_DB: dac_test
+      POSTGRES_USER: dac_test
+      POSTGRES_PASSWORD: disposable-test-password
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dac_test -d dac_test"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+  test:
+    build: .
+    profiles: ["test"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://dac_test:disposable-test-password@db-test:5432/dac_test
+      TEST_DATABASE_URL: postgresql+psycopg://dac_test:disposable-test-password@db-test:5432/dac_test
+      SECRET_KEY: isolated-tests-only-key-minimum-32-characters
+    command: ["pytest", "-q", "-p", "no:cacheprovider"]
+    depends_on:
+      db-test:
+        condition: service_healthy
+volumes:
+  postgres_data:
