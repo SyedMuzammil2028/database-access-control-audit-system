@@ -57,5 +57,5 @@ policy mutation persists.
 docker compose --profile test run --build --rm test pytest -q -p no:cacheprovider -k 'last_admin or policy_audit_failure or audit_insert_failure or concurrent'
 ```
 
-Run the full suite for submission. Take screenshots according to PROJECT_REPORT.md.
+Run the full suite for submission. The report and existing screenshots are in docs/submission and docs/screenshots.
 Do not claim production certification or arbitrary database interception.

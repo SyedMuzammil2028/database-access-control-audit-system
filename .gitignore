@@ -12,3 +12,15 @@ frontend/dist/
 frontend/test-results/
 frontend/playwright-report/
 *.tsbuildinfo
+
+# Local authoring/reference material; excluded from the submission repository.
+PROGRESS.md
+.vscode/
+Database Access Control and Audit System Proposal.docx
+docs/source/
+docs/PROJECT_REPORT.md
+docs/dependency-review.json
+docs/submission/Project_Report.docx
+docs/submission/README.md
+docs/submission/schema_snapshot.json
+scripts/build_submission.py

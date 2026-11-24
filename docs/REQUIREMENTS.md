@@ -10,8 +10,8 @@ limits; it is not a claim of external security certification.
 | PK/FK/composite/UQ/NOT NULL/CHECK | PostgreSQL migration; database constraint tests and sql/constraints.sql |
 | Registered document/report targets, R42 | scripts/seed.py and sql/seed.sql |
 | Real PostgreSQL, migrations, Docker | backend/app/database.py, alembic, Dockerfile, docker-compose.yml |
-| Secure login/logout/server sessions | security/passwords.py, security/sessions.py, routes/web.py; authentication, expiry and CSRF tests |
-| Backend role restrictions | require/authorize_category plus guard_admin; direct-route and unauthorized-write tests |
+| Secure login/logout/server sessions | backend/app/security/passwords.py, security/sessions.py, routes/api.py; authentication, expiry and CSRF tests |
+| Backend role restrictions | API context/category dependencies and guard_admin; direct-route and unauthorized-write tests |
 | Default deny, active users/resources/roles | services/authorization.py and rule tests |
 | Combined permissions and deterministic match | services/policy.py, authorization.py; multiple-role/history tests |
 | Durable audit, historical identifiers | audit_event snapshots, commit before response, failure-trigger tests |

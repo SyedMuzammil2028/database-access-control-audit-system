@@ -100,8 +100,7 @@ only fictional development data. Counts reflect database changes made by the tes
 The final npm install audited its resolved dependency set with **zero findings**.
 A primary PyPI advisory-metadata check covered **38 Python pins with zero listed
 advisories** after upgrading FastAPI/Starlette, pydantic-settings and pytest, and
-removing unused Jinja/multipart dependencies. The exact check is retained in
-`dependency-review.json`. This is a known-advisory review, not independent security
+removing unused Jinja/multipart dependencies. This is a known-advisory review, not independent security
 certification. Lockfiles pin the tested dependency set.
 
 ## Final fresh-volume check and live smoke

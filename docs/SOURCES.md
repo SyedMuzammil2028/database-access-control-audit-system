@@ -1,8 +1,9 @@
 # Implementation references
 
-The primary requirements are the supplied proposal and the two pasted master
-specifications. The proposal's extracted text and images are retained in
-`docs/source/` for traceability; the original DOCX is preserved at repository root.
+The functional requirements come from the supplied Database Access Control and
+Audit System Proposal dated 27 September 2026 and the accompanying project
+specifications. The original proposal was provided separately; the submission
+archive contains the completed report and ER diagram.
 
 Technical references consulted during implementation:
 
