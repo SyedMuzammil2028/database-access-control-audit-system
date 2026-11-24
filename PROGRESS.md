@@ -46,3 +46,11 @@ full-software-test result is claimed. Recorded results are from 22 November.
 - [x] Updated the Markdown report and regenerated the DOCX/PDF; verified 17 pages.
 - [x] Refreshed the submission and full-source ZIPs. No detector or plagiarism
       score is claimed; no new software test run was needed for the editorial edit.
+
+## GitHub submission on 25 November 2026
+
+- [x] Committed the complete source and submission documents on main.
+- [x] Pushed to private repository SyedMuzammil2028/database-access-control-audit-system.
+- [x] Checked staged files for excluded runtime paths and credential patterns.
+      .env, virtual environments, node_modules and archives remain excluded.
+- [x] Full project ZIP refreshed with repository and submission guidance.

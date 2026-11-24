@@ -1,5 +1,12 @@
 # Database Access Control and Audit System
 
+Repository: https://github.com/SyedMuzammil2028/database-access-control-audit-system
+
+The repository is private. Instructors need collaborator access to view it.
+For a file upload, use `artifacts/Database-Access-Control-Audit-System.zip`, which
+contains source code and submission documents. The smaller submission ZIP holds
+only the report and ER diagram. Archives are generated locally and are not committed.
+
 **Access Ledger** implements the supplied Database Systems proposal using
 PostgreSQL/FastAPI and React/TypeScript. It manages users, roles, resource
 permissions and immutable decision snapshots. The frontend follows the supplied
